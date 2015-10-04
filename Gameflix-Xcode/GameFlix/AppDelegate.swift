@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
     
     static let TVBaseURL = "http://192.168.24.1:9042/"
     
-    static let TVBootURL = "\(AppDelegate.TVBaseURL)js/application.js"
+    static let TVBootURL = "\(AppDelegate.TVBaseURL)client/js/application.js"
     
     // MARK: UIApplication Overrides
     
