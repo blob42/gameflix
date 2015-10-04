@@ -6,12 +6,12 @@ var ViewLoader = function(baseurl) {
         throw("ViewLoader: baseurl parameter is required !")
     }
 
-    this.BASEURL = baseurl;
+    this.BASEURL = baseurl + 'views/';
 }
 
-var handleApiResponse = function(request, viewName) {
+var handleApiResponse = function(request, viewName, callback) {
     if (request.status === 200) {
-        callback.call(self, request.responseText);
+        callback.call(this, request.responseText);
     } else {
         console.error('strange api response');
         var title = "View Loader Error",
@@ -52,7 +52,7 @@ ViewLoader.prototype.load = function(viewName, callback) {
     // request --> GET http://localhost:9001/index
     request.open("GET", this.BASEURL + viewName)
 
-    request.addEventListener("load", handleApiResponse.bind(self, request, viewName));
+    request.addEventListener("load", handleApiResponse.bind(self, request, viewName, callback));
     request.addEventListener("error", handleApiError.bind(self, request, viewName));
 
 

@@ -25,8 +25,8 @@ var viewLoader;
 App.onLaunch = function(options) {
 
     var javascriptFiles = [
-        `${options.BASEURL}js/ViewLoader.js`,
-        `${options.BASEURL}js/Presenter.js`
+        `${options.CLIENTURL}js/ViewLoader.js`,
+        `${options.CLIENTURL}js/Presenter.js`
     ];
 
 
@@ -46,7 +46,7 @@ App.onLaunch = function(options) {
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {
             //resourceLoader = new ResourceLoader(options.BASEURL);
-            var viewLoader = new ViewLoader(options.APIURL);
+            var viewLoader = new ViewLoader(options.CLIENTURL);
 
             viewLoader.load('index', function(resource){
                 var doc = Presenter.makeDocument(resource);
