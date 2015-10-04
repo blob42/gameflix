@@ -17,7 +17,12 @@ var Views = map[string]string{
 }
 
 func renderXMLTemplate(xmlpath string, c *gin.Context) {
-	t, _ := template.ParseFiles(xmlpath)
+	t, err := template.ParseFiles(xmlpath)
+
+	if err != nil {
+		c.Error(err)
+	}
+
 	t.Execute(c.Writer, nil)
 }
 
