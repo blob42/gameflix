@@ -9,6 +9,25 @@ var ViewLoader = function(baseurl) {
     this.BASEURL = baseurl;
 }
 
+var handleApiResponse = function(request, viewName) {
+    if (request.status === 200) {
+        callback.call(self, request.responseText);
+    } else {
+        console.error('strange api response');
+        var title = "View Loader Error",
+            description = `There was an error attempting to load the view '${viewName}'. \n\n Please try again later.`,
+            alert = createAlert(title, description);
+            navigationDocument.presentModal(alert);
+    }
+}
+
+var handleApiError = function(request, viewName) {
+    var title = "View Loader Error",
+        description = `There was an error attempting to load the view '${viewName}'. \n\n Please try again later.`,
+        alert = createAlert(title, description);
+        navigationDocument.presentModal(alert);
+        throw("API Error: " + request.status + ' - ' + request.statusText);
+}
 
 
 /**
@@ -22,6 +41,7 @@ var ViewLoader = function(baseurl) {
 ViewLoader.prototype.load = function(viewName, callback) {
 
 
+    console.info('Loading view: ' + viewName);
     var self = this;
 
     // Creat xmlhttprequest object
@@ -32,17 +52,12 @@ ViewLoader.prototype.load = function(viewName, callback) {
     // request --> GET http://localhost:9001/index
     request.open("GET", this.BASEURL + viewName)
 
-    function handleResponse(request) {
-        if (request.status === 200) {
-            callback.call(self, request.responseText);
-        } else {
-            var title = "View Loader Error",
-                description = `There was an error attempting to load the view '${viewName}'. \n\n Please try again later.`,
-                alert = createAlert(title, description);
-        }
-    }
+    request.addEventListener("load", handleApiResponse.bind(self, request, viewName));
+    request.addEventListener("error", handleApiError.bind(self, request, viewName));
 
-    request.addEventListener("load", handleResponse.bind(self, request));
+
+
+
     request.send();
 }
 
