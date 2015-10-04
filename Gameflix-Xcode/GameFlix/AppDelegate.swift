@@ -16,9 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
 
     var appController: TVApplicationController?
     
-    static let TVBaseURL = "http://192.168.24.1:9042/client/"
+    static let ServerURL = "http://192.168.24.1:9042"
+    
+    static let TVBaseURL = "\(ServerURL)/client/"
     
     static let TVBootURL = "\(AppDelegate.TVBaseURL)js/application.js"
+    
+    static let APIURL = "\(ServerURL)/api/"
+    
     
     // MARK: UIApplication Overrides
     
@@ -46,6 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDe
         }
         
         appControllerContext.launchOptions["BASEURL"] = AppDelegate.TVBaseURL
+        appControllerContext.launchOptions["APIURL"] = AppDelegate.APIURL
         
         if let launchOptions = launchOptions as? [String: AnyObject] {
             for (kind, value) in launchOptions {
