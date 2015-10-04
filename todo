@@ -1,0 +1,6 @@
+
+On play:
+- download video webpage from tvos
+- send text to server
+- get the parsed video link
+
