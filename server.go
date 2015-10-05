@@ -2,7 +2,9 @@ package main
 
 import (
 	//"fmt"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"io/ioutil"
 	"net/http"
 	"text/template"
 )
@@ -32,6 +34,13 @@ func handleView(c *gin.Context) {
 	renderXMLTemplate(xmlpath, c)
 }
 
+func getSourceUrl(c *gin.Context) {
+	body, _ := ioutil.ReadAll(c.Request.Body)
+
+	fmt.Printf("content is: --> %s", body)
+	c.String(http.StatusOK, "OK")
+}
+
 func main() {
 	router := gin.Default()
 
@@ -40,11 +49,14 @@ func main() {
 		api.GET("/test", func(c *gin.Context) {
 			c.String(http.StatusOK, "OK")
 		})
+
+		api.POST("/youtube/getSourceUrl", getSourceUrl)
 	}
 
 	client := router.Group("/client")
 	{
 		client.Static("/js", "./client/js")
+		client.Static("/vendor", "./client/vendor/")
 		client.GET("/views/:viewName", handleView)
 	}
 
