@@ -8,8 +8,6 @@ Abstract:
 This is the entry point to the application and handles the initial loading of required JavaScript files.
 */
 
-var resourceLoader;
-var viewLoader;
 
 /**
  * @description The onLaunch callback is invoked after the application JavaScript
@@ -25,8 +23,15 @@ var viewLoader;
 App.onLaunch = function(options) {
 
     var javascriptFiles = [
+        // vendor libraries
+        `${options.CLIENTURL}vendor/lz-string/libs/lz-string.min.js`,
+
+
+
+        // Application
         `${options.CLIENTURL}js/ViewLoader.js`,
-        `${options.CLIENTURL}js/Presenter.js`
+        `${options.CLIENTURL}js/Presenter.js`,
+        `${options.CLIENTURL}js/Video.js`
     ];
 
 
@@ -45,7 +50,26 @@ App.onLaunch = function(options) {
      */
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {
-            //resourceLoader = new ResourceLoader(options.BASEURL);
+
+
+
+
+            console.info('Testing request to youtube');
+            var youtubeDl = new YoutubeExtractor("https://www.youtube.com/watch?v=1Xo8WnJCdMA",
+                                                options);
+            youtubeDl.getSourceVideo(function(sourceVideo){
+
+                // Do something with source video
+
+            });
+
+
+
+
+            // /////////////
+            // LOAD MAIN VIEW HERE
+            // //////////////
+            //
             var viewLoader = new ViewLoader(options.CLIENTURL);
 
             viewLoader.load('index', function(resource){
