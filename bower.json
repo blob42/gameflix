@@ -1,0 +1,23 @@
+{
+  "name": "gameflix",
+  "version": "0.0.0",
+  "authors": [
+    "Chakib Benziane <chakib.benz@gmail.com>"
+  ],
+  "description": "gameflix vendor js",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/vendor/",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lz-string": "~1.4.4"
+  }
+}
