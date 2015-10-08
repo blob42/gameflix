@@ -55,7 +55,7 @@ App.onLaunch = function(options) {
 
 
             console.info('Testing request to youtube');
-            var youtubeDl = new YoutubeExtractor("https://www.youtube.com/watch?v=1Xo8WnJCdMA",
+            var youtubeDl = new YoutubeExtractor("https://m.youtube.com/watch?v=1Xo8WnJCdMA",
                                                 options);
             youtubeDl.getSourceVideo(function(sourceVideo){
 
