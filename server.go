@@ -2,9 +2,7 @@ package main
 
 import (
 	//"fmt"
-	"fmt"
 	"github.com/gin-gonic/gin"
-	"io/ioutil"
 	"net/http"
 	"text/template"
 )
@@ -35,9 +33,10 @@ func handleView(c *gin.Context) {
 }
 
 func getSourceUrl(c *gin.Context) {
-	body, _ := ioutil.ReadAll(c.Request.Body)
 
-	fmt.Printf("content is: --> %s", body)
+	//yPage := NewYoutubePage(c.Request)
+	//fmt.Printf("%s", yPage.RawPage)
+
 	c.String(http.StatusOK, "OK")
 }
 
