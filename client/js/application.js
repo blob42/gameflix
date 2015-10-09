@@ -22,8 +22,6 @@ This is the entry point to the application and handles the initial loading of re
  */
 App.onLaunch = function(options) {
 
-    this.LOL = "https://r8---sn-i5onxoxu-cxgl.googlevideo.com/videoplayback?upn=bwj6dR60RoY&lmt=1433145421203362&ip=92.228.97.61&expire=1444369686&sparams=dur%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cpl%2Cratebypass%2Crequiressl%2Csource%2Cupn%2Cexpire&sver=3&requiressl=yes&key=yt6&mt=1444347933&fexp=9408710%2C9409069%2C9414764%2C9415365%2C9415485%2C9416023%2C9416126%2C9417707%2C9418448%2C9420348%2C9421013&ratebypass=yes&itag=22&mm=31&ipbits=0&mn=sn-i5onxoxu-cxgl&mime=video%2Fmp4&ms=au&signature=043483BF2CD906CEACBB24FAC952E9BD110CF434.3B59B422CA068EA3F09950476604FE1E31B6AE7B&source=youtube&mv=m&initcwndbps=2477500&id=o-AOFwW4yrAOfXnwsWPsCRlxuU2vdJkJUSZttG-9RIr80E&pl=23&dur=1735.598"
-
 
     var javascriptFiles = [
         // vendor libraries
