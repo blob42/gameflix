@@ -31,6 +31,7 @@ func NewYoutubePage(req *http.Request) *YoutubePage {
 }
 
 func (youtubePage *YoutubePage) GetSourceVideo() {
+	// Will be used in future to get video source offline
 	youtubePage.VideoSrcUrl = "Test String"
 }
 
