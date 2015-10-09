@@ -2,13 +2,11 @@ package main
 
 import (
 	//"fmt"
-	"bufio"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
+	//"strings"
 	"text/template"
 )
 
@@ -39,9 +37,6 @@ func handleView(c *gin.Context) {
 
 func getSourceUrl(c *gin.Context) {
 
-	//yPage := NewYoutubePage(c.Request)
-	//fmt.Printf("%s", yPage.RawPage)
-
 	url, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -50,29 +45,7 @@ func getSourceUrl(c *gin.Context) {
 	downloader := NewYoutubeDownloader(string(url))
 	sourceUrl := string(downloader.GetSourceVideo())
 
-	sourceFile := "client/js/test.js"
-
-	t, err := template.ParseFiles("client/js/tpl.js")
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	f, err := os.Create(sourceFile)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer f.Close()
-
-	w := bufio.NewWriter(f)
-
-	t.Execute(w, sourceUrl[:len(sourceUrl)-1])
-
-	w.Flush()
-
-	fmt.Println(sourceUrl)
-
-	//c.String(http.StatusOK, "%s", sourceUrl)
-	c.String(http.StatusOK, "%s", "test.js")
+	c.String(http.StatusOK, "%s", sourceUrl[:len(sourceUrl)-1])
 }
 
 func main() {
