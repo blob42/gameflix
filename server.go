@@ -15,12 +15,17 @@ const (
 	TEMPLATES_DIR = "client/templates/index.xml"
 )
 
+//var videos = []string{
+//"https://www.youtube.com/watch?v=FDQx-guzx2s",
+//}
+
 var Views = map[string]string{
 	"index":   "client/templates/index.xml",
 	"catalog": "client/templates/catalog.xml",
 }
 
 func renderXMLTemplate(xmlpath string, c *gin.Context) {
+
 	t, err := template.ParseFiles(xmlpath)
 
 	if err != nil {
@@ -35,8 +40,11 @@ func renderXMLTemplate(xmlpath string, c *gin.Context) {
 }
 
 func handleView(c *gin.Context) {
+
 	viewName := c.Param("viewName")
+
 	xmlpath := Views[viewName]
+
 	renderXMLTemplate(xmlpath, c)
 }
 
@@ -72,6 +80,7 @@ func main() {
 	{
 		client.Static("/js", "./client/js")
 		client.Static("/vendor", "./client/vendor/")
+
 		client.GET("/views/:viewName", handleView)
 	}
 

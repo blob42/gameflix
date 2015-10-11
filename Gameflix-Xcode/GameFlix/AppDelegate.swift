@@ -13,6 +13,7 @@ import TVMLKit
 class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDelegate {
 
     var window: UIWindow?
+    
 
     var appController: TVApplicationController?
     
