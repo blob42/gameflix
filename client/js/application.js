@@ -21,11 +21,11 @@ This is the entry point to the application and handles the initial loading of re
  * the URL that was used to retrieve the application JavaScript.
  */
 App.onLaunch = function(options) {
-
+    App.options = options;
 
     var javascriptFiles = [
         // vendor libraries
-        `${options.CLIENTURL}vendor/lz-string/libs/lz-string.min.js`,
+        //`${options.CLIENTURL}vendor/lz-string/libs/lz-string.min.js`,
 
 
 
@@ -52,23 +52,15 @@ App.onLaunch = function(options) {
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {
 
-            console.info('Testing request to youtube');
-            ////https://www.youtube.com/watch?v=%s&gl=US&hl=en&has_verified=1&bpctr=9999999999
-            //var youtubeDl = new YoutubeExtractor("https://m.youtube.com/watch?v=1Xo8WnJCdMA",
-            var youtubeDl = new YoutubeExtractor("https://www.youtube.com/watch?v=f-0HjynlDrs",
-                                                options);
-            youtubeDl.getSourceVideo(function(sourceVideo){
+            //console.info('Testing request to youtube');
+            //var youtubeDl = new YoutubeExtractor("https://www.youtube.com/watch?v=f-0HjynlDrs",
+                                                //options);
+            //youtubeDl.getSourceVideo(function(sourceVideo){
 
-                //var player = new Player();
-                //var playlist = new Playlist();
-                //var mediaItem = new MediaItem("video", sourceVideo);
-                //player.playlist = playlist; player.playlist.push(mediaItem);
-                //player.present();
-                v = new Video(sourceVideo);
-                v.Play();
+                //v = new Video(sourceVideo);
+                //v.Play();
 
-            }.bind(this));
-
+            //}.bind(this));
 
 
 
@@ -78,11 +70,11 @@ App.onLaunch = function(options) {
             //
             var viewLoader = new ViewLoader(options.CLIENTURL);
 
-            viewLoader.load('index', function(resource){
+            viewLoader.load('catalog', function(resource){
                 var doc = Presenter.makeDocument(resource);
                 doc.addEventListener("select", Presenter.load.bind(Presenter));
                 navigationDocument.pushDocument(doc);
-            })
+            });
 
         } else {
             //Be sure to handle error cases in your code. You should present a readable, and friendly

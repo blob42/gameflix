@@ -16,7 +16,8 @@ const (
 )
 
 var Views = map[string]string{
-	"index": "client/templates/index.xml",
+	"index":   "client/templates/index.xml",
+	"catalog": "client/templates/catalog.xml",
 }
 
 func renderXMLTemplate(xmlpath string, c *gin.Context) {
@@ -26,7 +27,11 @@ func renderXMLTemplate(xmlpath string, c *gin.Context) {
 		c.Error(err)
 	}
 
-	t.Execute(c.Writer, nil)
+	err = t.Execute(c.Writer, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
 }
 
 func handleView(c *gin.Context) {
@@ -50,6 +55,9 @@ func getSourceUrl(c *gin.Context) {
 
 func main() {
 	router := gin.Default()
+
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
 
 	api := router.Group("/api")
 	{
