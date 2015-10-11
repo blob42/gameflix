@@ -10,62 +10,45 @@
                <section>
                    <listItemLockup>
                        <title> Test Videos</title>
+                        <decorationLabel>10</decorationLabel>
                        <relatedContent>
                            <grid>
-                           <section>
-                           <lockup videoSrc="https://www.youtube.com/watch?v=FDQx-guzx2s">
-                               <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
-                           </lockup>
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=KRCnkxmyjBc">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=eCrEc8u6mpg">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=8tltj8CxOCc">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=bpZyM-JtFtk">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=JgdrOMdUcqI">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=tttuwZuPJ8w">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=Xos2M-gTf6g">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=ijQD2RYvCg4">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                           <!--<lockup video-src="https://www.youtube.com/watch?v=H6QoEUqadW4">-->
-                               <!--<title>-->
-                                   <!--Video-->
-                                   <!--</title>-->
-                               <!--</lockup>-->
-                       </section>
-                       </grid>
+                               <section>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=FDQx-guzx2s">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=KRCnkxmyjBc">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=eCrEc8u6mpg">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=8tltj8CxOCc">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=bpZyM-JtFtk">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=JgdrOMdUcqI">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=tttuwZuPJ8w">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=Xos2M-gTf6g">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=ijQD2RYvCg4">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                                   <lockup videoSrc="https://www.youtube.com/watch?v=H6QoEUqadW4">
+                                       <img width="480" height="200" src="http://cdn.rcstatic.com/images/site_graphics/newsite/res_car_us.png"></img>
+                                   </lockup>
+                               </section>
+                           </grid>
                        </relatedContent>
                    </listItemLockup>
                </section>
-       </list>
-   </catalogTemplate>
-</document>
+           </list>
+       </catalogTemplate>
+   </document>
