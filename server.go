@@ -84,5 +84,5 @@ func main() {
 		client.GET("/views/:viewName", handleView)
 	}
 
-	router.Run(":9042")
+	router.Run(":9090")
 }

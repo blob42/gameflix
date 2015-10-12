@@ -1,0 +1,6 @@
+web:
+    image: .
+    command: gameflix
+    ports: 
+        - "9090:9090"
+    restart: always
