@@ -1,5 +1,5 @@
 web:
-    image: .
+    build: .
     command: gameflix
     ports: 
         - "9090:9090"
