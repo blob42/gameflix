@@ -1,64 +1,78 @@
 package main
 
 import (
-	//"fmt"
+	"errors"
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"io/ioutil"
 	"log"
 	"net/http"
-	//"strings"
+	"path"
+	"reflect"
 	"text/template"
 )
 
 //View name -> address mappings
 const (
-	TEMPLATES_DIR = "client/templates/index.xml"
+	TEMPLATES_DIR = "client/templates"
 )
 
-//var videos = []string{
-//"https://www.youtube.com/watch?v=FDQx-guzx2s",
-//}
+// Do data collection here and push a pointer to data
+func IndexHandler(c *gin.Context) {
 
-var Views = map[string]string{
-	"index":   "client/templates/index.xml",
-	"catalog": "client/templates/catalog.xml",
+	// Get Videos
+	//videos := getVideosFromPlaylist("PLTFohR7GUZYcD8t4bbSKYpnsjMWf19Qgo", 10)
+	renderView(c, &struct{}{})
+	//renderView(c, videos)
 }
 
-func renderXMLTemplate(xmlpath string, c *gin.Context) {
+func HomeHandler(c *gin.Context) {
+	videos := getVideosFromPlaylist("PLTFohR7GUZYcD8t4bbSKYpnsjMWf19Qgo", 10)
+	renderView(c, videos)
+}
 
-	t, err := template.ParseFiles(xmlpath)
+var ViewHandlers = map[string]interface{}{
+	"index": IndexHandler,
+	"home":  HomeHandler,
+}
 
-	if err != nil {
-		c.Error(err)
+func Call(m interface{}, name string, params ...interface{}) (result []reflect.Value, err error) {
+	f := reflect.ValueOf(m)
+	if len(params) != f.Type().NumIn() {
+		err = errors.New("The number of params is not adapted.")
+		return
 	}
-
-	err = t.Execute(c.Writer, nil)
-	if err != nil {
-		log.Fatal(err)
+	in := make([]reflect.Value, len(params))
+	for k, param := range params {
+		in[k] = reflect.ValueOf(param)
 	}
-
+	result = f.Call(in)
+	return
 }
 
 func handleView(c *gin.Context) {
-
 	viewName := c.Param("viewName")
 
-	xmlpath := Views[viewName]
-
-	renderXMLTemplate(xmlpath, c)
+	if viewH, ok := ViewHandlers[viewName]; ok {
+		Call(viewH, viewName, c)
+	} else {
+		http.NotFound(c.Writer, c.Request)
+	}
 }
 
-func getSourceUrl(c *gin.Context) {
+func renderView(c *gin.Context, data interface{}) {
+	viewName := c.Param("viewName")
 
-	url, err := ioutil.ReadAll(c.Request.Body)
+	xmlPath := path.Join(TEMPLATES_DIR, fmt.Sprint(viewName, ".xml"))
+	t, err := template.ParseFiles(xmlPath)
+
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
 	}
 
-	downloader := NewYoutubeDownloader(string(url))
-	sourceUrl := string(downloader.GetSourceVideo())
-
-	c.String(http.StatusOK, "%s", sourceUrl[:len(sourceUrl)-1])
+	err = t.Execute(c.Writer, data)
+	if err != nil {
+		log.Panic(err)
+	}
 }
 
 func main() {
@@ -86,3 +100,12 @@ func main() {
 
 	router.Run(":9090")
 }
+
+//func main() {
+//videos := getVideosFromPlaylist("PLTFohR7GUZYcD8t4bbSKYpnsjMWf19Qgo", 10)
+
+//for _, v := range videos {
+//fmt.Println(v.getThumbnail("maxres"))
+//}
+//return
+//}

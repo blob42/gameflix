@@ -4,39 +4,21 @@ package main
 // https://m.youtube.com/watch?v=Bdw_ikz2hBY
 
 import (
-	encoding "github.com/sp4ke/lz-string-go"
+	"github.com/gin-gonic/gin"
 	"io/ioutil"
+	"log"
 	"net/http"
 )
 
-type YoutubePage struct {
-	CompressedPage []byte
-	CompressedLen  int64
-	RawPage        string
-	VideoSrcUrl    string
-}
+func getSourceUrl(c *gin.Context) {
 
-// YoutubePage constructor
-func NewYoutubePage(req *http.Request) *YoutubePage {
-	compressed, _ := ioutil.ReadAll(req.Body)
-
-	p := YoutubePage{
-		CompressedPage: compressed,
-		CompressedLen:  req.ContentLength,
+	url, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		log.Fatal(err)
 	}
 
-	p.Uncompress()
+	downloader := NewYoutubeDownloader(string(url))
+	sourceUrl := string(downloader.GetSourceVideo())
 
-	return &p
-}
-
-func (youtubePage *YoutubePage) GetSourceVideo() {
-	// Will be used in future to get video source offline
-	youtubePage.VideoSrcUrl = "Test String"
-}
-
-func (youtubePage *YoutubePage) Uncompress() {
-	strPage := string(youtubePage.CompressedPage[:youtubePage.CompressedLen])
-	decoded, _ := encoding.DecompressFromEncodedUriComponent(strPage)
-	youtubePage.RawPage = decoded
+	c.String(http.StatusOK, "%s", sourceUrl[:len(sourceUrl)-1])
 }
