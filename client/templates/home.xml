@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <document>
     <catalogTemplate>
-       <banner>
-           <title>
-               Test Videos
-           </title>
-       </banner>
+       <!--<banner>-->
+           <!--<title> Test Home </title>-->
+       <!--</banner>-->
        <list>
                <section>
                    <listItemLockup>
-                       <title> Test Videos</title>
-                        <decorationLabel>10</decorationLabel>
+                       <title> Test Home </title>
+                       <decorationLabel>{{ len . }}</decorationLabel>
                        <relatedContent>
                            <grid>
+                               <header>
+                                   <title> Test Home </title>
+                               </header>
                                <section>
                                    {{ $resolution := "high" }}
                                    {{ range $index, $video := . }}
                                    <lockup videoSrc="{{ $video.GetVideoUrl }}">
                                        <img width="480" height="360" src="{{ $video.GetThumbnail $resolution }}"></img>
+                                       <description>{{ $video.Description | html }}</description>
+                                       <overlay>
+                                           <title>{{ $video.Title | html }}</title>
+                                       </overlay>
                                    </lockup>
                                    {{end}}
                                    <!--<lockup videoSrc="https://www.youtube.com/watch?v=KRCnkxmyjBc">-->
@@ -47,6 +52,20 @@
                                    <!--<lockup videoSrc="https://www.youtube.com/watch?v=H6QoEUqadW4">-->
                                        <!--<img width="480" height="360" src="https://i.ytimg.com/vi/H6QoEUqadW4/hqdefault.jpg"></img>-->
                                    <!--</lockup>-->
+                               </section>
+                           </grid>
+                       </relatedContent>
+                   </listItemLockup>
+               </section>
+               <section>
+                   <listItemLockup>
+                       <title> Test Home 2 </title>
+                       <relatedContent>
+                           <grid>
+                               <header>
+                                   <title> Test Home </title>
+                               </header>
+                               <section>
                                </section>
                            </grid>
                        </relatedContent>
