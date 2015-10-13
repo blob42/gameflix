@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <document>
-    <catalogTemplate>
+  <head>
+    <style>
+      .darkBackground {
+        background-color: rgba(32, 34, 35, .7);
+      }
+      .descriptionLayout {
+        tv-text-max-lines: 8;
+      }
+    </style>
+  </head>
+    <catalogTemplate class="darkBackground">
        <!--<banner>-->
            <!--<title> Test Home </title>-->
        <!--</banner>-->
@@ -58,7 +68,7 @@
                    </listItemLockup>
                </section>
                <section>
-                   <listItemLockup>
+                   <listItemLockup view="index">
                        <title> Test Home 2 </title>
                        <relatedContent>
                            <grid>

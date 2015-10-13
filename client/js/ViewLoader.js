@@ -68,16 +68,3 @@ var ViewLoader = (function(){
 
     return ViewLoader;
 })();
-
-
-
-
-
-
-// Usage example
-//
-//var loader = new ViewLoader('http://localhost:911')
-//var loader = new ViwerLoader('http://localhost2:02134')
-//loader.loadView('/index', function(xml){
-
-//})

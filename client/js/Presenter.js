@@ -111,7 +111,7 @@ var Presenter = {
 
         var self = this,
             ele = event.target,
-            templateURL = ele.getAttribute("template"),
+            viewName = ele.getAttribute("view"),
             presentation = ele.getAttribute("presentation"),
             videoSrc =  ele.getAttribute("videoSrc");
 
@@ -128,7 +128,7 @@ var Presenter = {
         Check if the selected element has a 'template' attribute. If it does then we begin
         the process to present the template to the user.
         */
-        if (templateURL) {
+        if (viewName) {
             /*
             Whenever a user action is taken you need to visually indicate to the user that
             you are processing their action. When a users action indicates that a new document
@@ -141,7 +141,7 @@ var Presenter = {
             /*
             Here we are retrieving the template listed in the templateURL property.
             */
-            resourceLoader.loadResource(templateURL,
+            App.viewLoader.load(viewName,
                 function(resource) {
                     if (resource) {
                         /*

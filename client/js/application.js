@@ -52,6 +52,7 @@ App.onLaunch = function(options) {
     evaluateScripts(javascriptFiles, function(success) {
         if (success) {
 
+            App.viewLoader = new ViewLoader(options.CLIENTURL);
             //console.info('Testing request to youtube');
             //var youtubeDl = new YoutubeExtractor("https://www.youtube.com/watch?v=f-0HjynlDrs",
                                                 //options);
@@ -68,9 +69,7 @@ App.onLaunch = function(options) {
             // LOAD MAIN VIEW HERE
             // //////////////
             //
-            var viewLoader = new ViewLoader(options.CLIENTURL);
-
-            viewLoader.load('home', function(resource){
+            App.viewLoader.load('home', function(resource){
                 var doc = Presenter.makeDocument(resource);
                 doc.addEventListener("select", Presenter.load.bind(Presenter));
                 navigationDocument.pushDocument(doc);
