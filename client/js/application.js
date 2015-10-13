@@ -70,7 +70,7 @@ App.onLaunch = function(options) {
             //
             var viewLoader = new ViewLoader(options.CLIENTURL);
 
-            viewLoader.load('catalog', function(resource){
+            viewLoader.load('home', function(resource){
                 var doc = Presenter.makeDocument(resource);
                 doc.addEventListener("select", Presenter.load.bind(Presenter));
                 navigationDocument.pushDocument(doc);
