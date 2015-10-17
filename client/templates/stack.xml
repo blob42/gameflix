@@ -7,8 +7,8 @@ var T = function(){ return `<?xml version="1.0" encoding="UTF-8" ?>
                     height: 350;
                 }
 
-                .lockup {
-                    margin: 100;
+                .playListMargin {
+                 margin: 0 30;
                 }
 
                 .background {
@@ -17,7 +17,7 @@ var T = function(){ return `<?xml version="1.0" encoding="UTF-8" ?>
 
             </style>
         </head>
-       <stackTemplate class="background">
+       <stackTemplate theme="dark" class="background">
           <identityBanner class="banner">
               <background>
                   <img class="background" src="${this.CLIENTURL}images/bg-dark-banner.jpeg" width="1920" height="400"/>
@@ -28,8 +28,8 @@ var T = function(){ return `<?xml version="1.0" encoding="UTF-8" ?>
              <shelf>
                 <section>
                    {{ range $index, $video := . }}
-                   <lockup videoSrc="{{ $video.GetVideoUrl }}">
-                       <img width="480" height="360" src="{{ $video.GetThumbnail $resolution }}"></img>
+                   <lockup  videoSrc="{{ $video.GetVideoUrl }}">
+                       <img class="playListMargin" width="480" height="360" src="{{ $video.GetThumbnail $resolution }}"></img>
                        <description>{{ $video.Description | html }}</description>
                    </lockup>
                    {{end}}
@@ -39,7 +39,7 @@ var T = function(){ return `<?xml version="1.0" encoding="UTF-8" ?>
                 <section>
                    {{ range $index, $video := . }}
                    <lockup videoSrc="{{ $video.GetVideoUrl }}">
-                       <img width="480" height="360" src="{{ $video.GetThumbnail $resolution }}"></img>
+                       <img class="playListMargin" width="480" height="360" src="{{ $video.GetThumbnail $resolution }}"></img>
                        <description>{{ $video.Description | html }}</description>
                    </lockup>
                    {{end}}
