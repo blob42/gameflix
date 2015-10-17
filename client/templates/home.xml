@@ -16,7 +16,7 @@
        <!--</banner>-->
        <list>
                <section>
-                   <listItemLockup>
+                   <listItemLockup view="home">
                        <title> Test Home </title>
                        <decorationLabel>{{ len . }}</decorationLabel>
                        <relatedContent>
@@ -68,7 +68,7 @@
                    </listItemLockup>
                </section>
                <section>
-                   <listItemLockup view="index">
+                   <listItemLockup view="stack">
                        <title> Test Home 2 </title>
                        <relatedContent>
                            <grid>

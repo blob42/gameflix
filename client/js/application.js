@@ -69,7 +69,7 @@ App.onLaunch = function(options) {
             // LOAD MAIN VIEW HERE
             // //////////////
             //
-            App.viewLoader.load('home', function(resource){
+            App.viewLoader.load('stack', function(resource){
                 var doc = Presenter.makeDocument(resource);
                 doc.addEventListener("select", Presenter.load.bind(Presenter));
                 navigationDocument.pushDocument(doc);

@@ -2,6 +2,7 @@ var ViewLoader = (function(){
 
     function handleApiResponse(xhr, viewName, callback) {
         if (xhr.status === 200) {
+            console.log(xhr.responseText);
             callback.call(this, xhr.responseText);
         } else {
             console.error('strange api response');

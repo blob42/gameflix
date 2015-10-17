@@ -33,6 +33,7 @@ func HomeHandler(c *gin.Context) {
 var ViewHandlers = map[string]interface{}{
 	"index": IndexHandler,
 	"home":  HomeHandler,
+	"stack": HomeHandler,
 }
 
 func Call(m interface{}, name string, params ...interface{}) (result []reflect.Value, err error) {
@@ -94,11 +95,12 @@ func main() {
 	{
 		client.Static("/js", "./client/js")
 		client.Static("/vendor", "./client/vendor/")
+		client.Static("/images", "./client/images/")
 
 		client.GET("/views/:viewName", handleView)
 	}
 
-	router.Run(":9090")
+	router.Run(":9042")
 }
 
 //func main() {
