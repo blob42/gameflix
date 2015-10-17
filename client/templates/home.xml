@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+var T = function() { return `<?xml version="1.0" encoding="UTF-8" ?>
 <document>
   <head>
     <style>
@@ -83,4 +83,5 @@
                </section>
            </list>
        </catalogTemplate>
-   </document>
+   </document>`
+   }

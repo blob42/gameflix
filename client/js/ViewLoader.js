@@ -1,9 +1,15 @@
 var ViewLoader = (function(){
 
     function handleApiResponse(xhr, viewName, callback) {
+        var self = this;
+
         if (xhr.status === 200) {
-            console.log(xhr.responseText);
-            callback.call(this, xhr.responseText);
+
+            eval(xhr.responseText);
+            var resource = T.call(App.options);
+
+            callback.call(this, resource);
+
         } else {
             console.error('strange api response');
             var title = "View Loader Error",

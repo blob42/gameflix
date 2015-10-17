@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+var T = function(){ return `<?xml version="1.0" encoding="UTF-8" ?>
 {{ $resolution := "high" }}
     <document>
         <head>
@@ -20,8 +20,7 @@
        <stackTemplate class="background">
           <identityBanner class="banner">
               <background>
-                  {{ $clienturl := "http://192.168.24.1:9042/client/"}}
-                  <img class="background" src="{{$clienturl}}images/bg-dark-banner.jpeg" width="1920" height="400"/>
+                  <img class="background" src="${this.CLIENTURL}images/bg-dark-banner.jpeg" width="1920" height="400"/>
               </background>
              <!--<title>Available Action Movies</title>-->
           </identityBanner>
@@ -48,5 +47,6 @@
              </shelf>
           </collectionList>
        </stackTemplate>
-    </document>
+    </document>`
+    }
 

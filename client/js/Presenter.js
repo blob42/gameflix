@@ -107,7 +107,6 @@ var Presenter = {
      * @param {Event} event - The select event
      */
     load: function(event) {
-        console.log(event);
 
         var self = this,
             ele = event.target,
@@ -117,8 +116,8 @@ var Presenter = {
 
         /* if we have a video source, play the video */
         if (videoSrc) {
-            console.log('We have a video source');
-            console.log(videoSrc);
+            //console.log('We have a video source');
+            //console.log(videoSrc);
             v = new Video(videoSrc, App.options);
             v.Play();
             return;
