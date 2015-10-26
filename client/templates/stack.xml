@@ -25,28 +25,21 @@ var T = function(){ return `<?xml version="1.0" encoding="UTF-8" ?>
              <!--<title>Available Action Movies</title>-->
           </identityBanner>
           <collectionList>
-             <shelf>
+             <grid style="background-color: red">
+                <header>
+                    <title>Total Biscuit</title>
+                    <img src="https://yt3.ggpht.com/-JB_7MeH8Llk/AAAAAAAAAAI/AAAAAAAAAAA/Xbsn4j601BU/s100-c-k-no/photo.jpg" accessibility="" />
+                </header>
                 <section>
-                   {{ range $index, $video := . }}
-                   <lockup  videoSrc="{{ $video.GetVideoUrl }}">
-                       <img class="playListMargin" width="480" height="360" src="{{ $video.GetThumbnail $resolution }}"></img>
-                       <description>{{ $video.Description | html }}</description>
+                   {{ range $index, $pls := . }}
+                   <lockup>
+                       <img class="playListMargin" width="480" height="360" src="{{ $pls.Thumbnails.High.Url }}"></img>
+                       <description>{{ $pls.Description | html }}</description>
                    </lockup>
                    {{end}}
                 </section>
-             </shelf>
-             <shelf>
-                <section>
-                   {{ range $index, $video := . }}
-                   <lockup videoSrc="{{ $video.GetVideoUrl }}">
-                       <img class="playListMargin" width="480" height="360" src="{{ $video.GetThumbnail $resolution }}"></img>
-                       <description>{{ $video.Description | html }}</description>
-                   </lockup>
-                   {{end}}
-                </section>
-             </shelf>
+             </grid>
           </collectionList>
        </stackTemplate>
     </document>`
     }
-

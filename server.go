@@ -26,8 +26,9 @@ func IndexHandler(c *gin.Context) {
 }
 
 func HomeHandler(c *gin.Context) {
-	videos := getVideosFromPlaylist("PLTFohR7GUZYcD8t4bbSKYpnsjMWf19Qgo", 10)
-	renderView(c, videos)
+	//videos := getVideosFromPlaylist(TEST_PLAYLIST_ID, 10)
+	playlists, _ := getPlaylists(Y_PLAYLIST_IDS)
+	renderView(c, playlists)
 }
 
 var ViewHandlers = map[string]interface{}{

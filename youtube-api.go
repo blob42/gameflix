@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strings"
 
 	//"golang.org/x/net/context"
 	//"golang.org/x/oauth2"
@@ -14,11 +15,15 @@ import (
 
 // Global variables
 const (
-	YOUTUBE_API_KEY     = "AIzaSyA8PdvfIetV1XqiLAGeAaDIWAmyCMn_Qj4"
-	TEST_CHANNEL_HANDLE = "TotalHalibut"
+	YOUTUBE_API_KEY = "AIzaSyA8PdvfIetV1XqiLAGeAaDIWAmyCMn_Qj4"
 
 	Y_THUMBNAIL_URL = "https://i.ytimg.com/vi/"
 	Y_VIDEO_URL     = "https://www.youtube.com/watch?v="
+
+	// For Testing
+	TEST_CHANNEL_HANDLE = "TotalHalibut"
+	TEST_CHANNEL_ID     = "UCy1Ms_5qBTawC-k7PVjHXKQ"
+	TEST_PLAYLIST_ID    = "PLTFohR7GUZYe_b-6MgArbh6p0r1HrXFvv"
 )
 
 var (
@@ -26,6 +31,14 @@ var (
 		"high":     "hqdefault.jpg",
 		"standard": "sddefault.jpg",
 		"maxres":   "maxresdefault.jpg",
+	}
+
+	// TB PLS IDS
+	Y_PLAYLIST_IDS = []string{
+		"PLTFohR7GUZYcD8t4bbSKYpnsjMWf19Qgo",
+		"PLFE010B0EEA9E5F06",
+		"PLTFohR7GUZYe_b-6MgArbh6p0r1HrXFvv",
+		"PLTFohR7GUZYdGIggZpSsd6dNSFPW7Kz7s",
 	}
 )
 
@@ -35,6 +48,13 @@ type YVideo struct {
 	ID          string
 	Title       string
 	Description string
+}
+
+type YPlaylist struct {
+	ID          string
+	Title       string
+	Description string
+	Thumbnails  interface{}
 }
 
 func (v *YVideo) GetThumbnail(mode string) string {
@@ -67,6 +87,67 @@ func getYoutubeService() YoutubeService {
 	}
 }
 
+func getPlaylists(plIds []string) ([]YPlaylist, error) {
+
+	ySrv := getYoutubeService()()
+	var playlists []YPlaylist
+
+	pls, err := ySrv.Playlists.List("id,snippet").Id(strings.Join(plIds, ",")).Do()
+	if err != nil {
+		log.Panic(err)
+	}
+
+	for _, item := range pls.Items {
+		pl := YPlaylist{
+			ID:          item.Id,
+			Title:       item.Snippet.Title,
+			Description: item.Snippet.Description,
+			Thumbnails:  item.Snippet.Thumbnails,
+		}
+
+		playlists = append(playlists, pl)
+	}
+
+	return playlists, err
+
+}
+
+func getPlaylistsForChannel(channelId string) ([]YPlaylist, error) {
+
+	ySrv := getYoutubeService()()
+	var playlists []YPlaylist
+
+	pls, err := ySrv.Playlists.List("id,snippet").ChannelId(channelId).Do()
+	if err != nil {
+		log.Panic(err)
+	}
+
+	for _, item := range pls.Items {
+		pl := YPlaylist{
+			ID:          item.Id,
+			Title:       item.Snippet.Title,
+			Description: item.Snippet.Description,
+			Thumbnails:  item.Snippet.Thumbnails,
+		}
+
+		playlists = append(playlists, pl)
+	}
+
+	return playlists, err
+}
+
+func GetChannelId(username string) (string, error) {
+	ySrv := getYoutubeService()()
+
+	channels, err := ySrv.Channels.List("id").ForUsername(username).MaxResults(1).Do()
+
+	if err != nil {
+		log.Panic(err)
+	}
+
+	return channels.Items[0].Id, err
+}
+
 func getVideosFromPlaylist(plId string, n int64) []YVideo {
 
 	ySrv := getYoutubeService()()
@@ -89,36 +170,3 @@ func getVideosFromPlaylist(plId string, n int64) []YVideo {
 
 	return videos
 }
-
-//func main() {
-
-//channels, err := ySrv.Channels.List("id").ForUsername(TEST_CHANNEL_HANDLE).MaxResults(1).Do()
-//if err != nil {
-//t.Fatal(err)
-//}
-
-//cid := channels.Items[0].Id
-
-//playlists, err := ySrv.Playlists.List("id").ChannelId(cid).MaxResults(10).Do()
-//if err != nil {
-//t.Fatal(err)
-//}
-
-//for _, pl := range playlists.Items {
-//fmt.Printf("\n___ Playlist: %s ___\n", pl.Id)
-
-//playListItems, err := ySrv.PlaylistItems.List("id,snippet").PlaylistId(pl.Id).MaxResults(10).Do()
-//if err != nil {
-//t.Fatal(err)
-//}
-
-//for _, vd := range playListItems.Items {
-//fmt.Printf(" --> %s\n", vd.Snippet.ResourceId.VideoId)
-//}
-
-//}
-
-//fmt.Printf("Id for TB is : %s\n", cid)
-
-//return
-//}
