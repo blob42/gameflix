@@ -77,6 +77,13 @@ func renderView(c *gin.Context, data interface{}) {
 	}
 }
 
+func getVideosHandler(c *gin.Context) {
+	plId := c.Param("plId")
+	videos := getVideosFromPlaylist(plId, 10)
+
+	c.JSON(http.StatusOK, gin.H{"videos": videos})
+}
+
 func main() {
 	router := gin.Default()
 
@@ -88,6 +95,8 @@ func main() {
 		api.GET("/test", func(c *gin.Context) {
 			c.String(http.StatusOK, "OK")
 		})
+
+		api.GET("/youtube/videosFromPlaylist/:plId", getVideosHandler)
 
 		api.POST("/youtube/getSourceUrl", getSourceUrl)
 	}

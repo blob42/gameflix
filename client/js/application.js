@@ -30,6 +30,7 @@ App.onLaunch = function(options) {
 
 
         // Application
+        `${options.CLIENTURL}js/promise.min.js`,
         `${options.CLIENTURL}js/ViewLoader.js`,
         `${options.CLIENTURL}js/Presenter.js`,
         `${options.CLIENTURL}js/Video.js`

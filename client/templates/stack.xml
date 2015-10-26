@@ -32,7 +32,7 @@ var T = function(){ return `<?xml version="1.0" encoding="UTF-8" ?>
                 </header>
                 <section>
                    {{ range $index, $pls := . }}
-                   <lockup>
+                   <lockup playListSrc="{{ $pls.ID }}">
                        <img class="playListMargin" width="480" height="360" src="{{ $pls.Thumbnails.High.Url }}"></img>
                        <description>{{ $pls.Description | html }}</description>
                    </lockup>

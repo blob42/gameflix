@@ -112,7 +112,8 @@ var Presenter = {
             ele = event.target,
             viewName = ele.getAttribute("view"),
             presentation = ele.getAttribute("presentation"),
-            videoSrc =  ele.getAttribute("videoSrc");
+            videoSrc =  ele.getAttribute("videoSrc"),
+            playListSrc = ele.getAttribute("playListSrc");
 
         /* if we have a video source, play the video */
         if (videoSrc) {
@@ -120,6 +121,15 @@ var Presenter = {
             //console.log(videoSrc);
             v = new Video(videoSrc, App.options);
             v.Play();
+            return;
+        };
+
+        if (playListSrc) {
+            pl = new VPlayList(playListSrc, App.options);
+            pl.Create().then(function(err,result){
+                pl.Start();
+            })
+
             return;
         };
 

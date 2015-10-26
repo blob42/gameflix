@@ -14,11 +14,13 @@ func getSourceUrl(c *gin.Context) {
 
 	url, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
-		log.Fatal(err)
+		log.Panic(err)
+		c.String(http.StatusExpectationFailed, err.Error())
+	} else {
+		downloader := NewYoutubeDownloader(string(url))
+		sourceUrl := string(downloader.GetSourceVideo())
+
+		c.String(http.StatusOK, "%s", sourceUrl[:len(sourceUrl)-1])
 	}
 
-	downloader := NewYoutubeDownloader(string(url))
-	sourceUrl := string(downloader.GetSourceVideo())
-
-	c.String(http.StatusOK, "%s", sourceUrl[:len(sourceUrl)-1])
 }
