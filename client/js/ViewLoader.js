@@ -1,6 +1,6 @@
 var ViewLoader = (function(){
 
-    function handleApiResponse(xhr, viewName, callback) {
+    function handleApiResponse(xhr, viewName, promise) {
         var self = this;
 
         if (xhr.status === 200) {
@@ -8,7 +8,8 @@ var ViewLoader = (function(){
             eval(xhr.responseText);
             var resource = T.call(App.options);
 
-            callback.call(this, resource);
+            promise.done(null, resource)
+            //callback.call(this, resource);
 
         } else {
             console.error('strange api response');
@@ -51,6 +52,7 @@ var ViewLoader = (function(){
 
 
         console.info('Loading view: ' + viewName);
+        var p = new promise.Promise();
         var self = this;
 
         // Creat xmlhttprequest object
@@ -64,12 +66,13 @@ var ViewLoader = (function(){
         xhr.addEventListener("load", handleApiResponse.bind(self,
                                                             xhr,
                                                             viewName,
-                                                            callback));
+                                                            p));
 
     xhr.addEventListener("error", handleApiError.bind(self,
                                                       xhr,
                                                       viewName));
     xhr.send();
+    return p;
     };
 
 

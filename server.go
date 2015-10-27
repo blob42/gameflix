@@ -32,9 +32,10 @@ func HomeHandler(c *gin.Context) {
 }
 
 var ViewHandlers = map[string]interface{}{
-	"index": IndexHandler,
-	"home":  HomeHandler,
-	"stack": HomeHandler,
+	"index":        IndexHandler,
+	"home":         HomeHandler,
+	"stack":        HomeHandler,
+	"videoOverlay": IndexHandler,
 }
 
 func Call(m interface{}, name string, params ...interface{}) (result []reflect.Value, err error) {
