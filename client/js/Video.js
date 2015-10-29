@@ -59,7 +59,7 @@ var VPlayList = (function(){
             'use strict';
             if (xhr.status === 200) {
                 console.info('Youtube: Got a source URL');
-                p.done(null, xhr.responseText);
+                p.done(null, JSON.parse(xhr.responseText));
                 //callback.call(self, xhr.responseText);
             } else if (xhr.status !== 200) {
                 console.error('Youtube: Request failed');
@@ -98,14 +98,11 @@ var VPlayList = (function(){
         this.player = new Player();
         this.player.playlist = this.playlist;
 
-        this.player.addEventListener('timeBoundaryDidCross', function(ev){
-            console.log('60 seconds crossed');
-        },[60]);
 
-        App.viewLoader.load('videoOverlay').then(function(err, resource){
-            var doc = Presenter.makeDocument(resource);
-            self.player.overlayDocument = doc;
-        });
+        //App.viewLoader.load('videoOverlay').then(function(err, resource){
+            //var doc = Presenter.makeDocument(resource);
+            //self.player.overlayDocument = doc;
+        //});
     };
 
     VPlayList.prototype.Create = function() {
@@ -124,24 +121,56 @@ var VPlayList = (function(){
         for (var i=0; i < videos.length; i++) {
             var mediaItem = new MediaItem("video", videos[i].ID);
             mediaItem.title = videos[i].Title;
+            mediaItem.description = videos[i].Description;
 
             this.playlist.push(mediaItem);
         }
 
     };
 
-
-    VPlayList.prototype.Start = function() {
-
+    VPlayList.prototype.populateMediaItem = function(mI) {
+        console.info('Populating media item: ' + mI.url);
         var self = this;
 
-        var firstVidId = this.playlist.item(0).url;
+        var rawUrl = mI.url;
+        var p = new promise.Promise();
 
-        __getSourceVideo(firstVidId).then(function(error, videoUrl){
-            self.playlist.item(0).url = videoUrl;
-            self.player.present();
+        __getSourceVideo(rawUrl).then(function(err, videoData){
+
+            self.player.removeEventListener('timeBoundaryDidCross');
+
+            mI.url = videoData.url;
+            mI.duration = videoData.duration;
+
+            //var d = videoData.duration - 20;
+
+            //self.player.addEventListener('timeBoundaryDidCross', function(ev){
+                //self.populateMediaItem(self.player.nextMediaItem);
+            //},[d]);
+
+            p.done(null, videoData);
         });
 
+        return p;
+    };
+
+    VPlayList.prototype.playVideoAt = function(index) {
+        var self = this;
+        var mItem = self.playlist.item(index);
+        self.populateMediaItem(mItem).then(function(videoData){
+            self.player.present();
+
+            // Dirty hack to populate rest of playlist videos
+            for (var i=1; i < self.playlist.length; i++) {
+                var mI = self.playlist.item(i);
+                self.populateMediaItem(mI);
+            };
+        });
+
+    };
+
+    VPlayList.prototype.Start = function() {
+        this.playVideoAt(0);
     };
 
     return VPlayList;

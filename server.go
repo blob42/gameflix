@@ -35,7 +35,7 @@ var ViewHandlers = map[string]interface{}{
 	"index":        IndexHandler,
 	"home":         HomeHandler,
 	"stack":        HomeHandler,
-	"videoOverlay": IndexHandler,
+	"videoOverlay": HomeHandler,
 }
 
 func Call(m interface{}, name string, params ...interface{}) (result []reflect.Value, err error) {
@@ -94,6 +94,7 @@ func main() {
 	api := router.Group("/api")
 	{
 		api.GET("/test", func(c *gin.Context) {
+			fmt.Println(c.Request.Header.Get("User-Agent"))
 			c.String(http.StatusOK, "OK")
 		})
 

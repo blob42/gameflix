@@ -1,40 +1,45 @@
 var T = function(){ return `<?xml version="1.0" encoding="UTF-8" ?>
-<document>
-    <head>
+{{ $resolution := "high" }}
+    <document>
+        <head>
             <style>
-            .alert{
-              tv-position: top; text-align: center; color: rgba(255,255,255,1); background-color: rgba(0,0,0,0.5); height: 300;
-            }
-            .header{
-                tv-position: top;
-            }
-            .title{
-                tv-text-style: headline;
-                background-color: rgba(30,30,30,0.9);
-            }
-            .description{
-                tv-text-style: subtitle;
-                font-size: 32;
-                background-color: rgba(30,30,30,0.9);
-            }
-            .space{
-                background-color: rgba(30,30,30,0.9);
-                height: 40;
-            }
-            .space-small{
-                background-color: rgba(30,30,30,0.9);
-                height: 10;
-            }
+                .banner {
+                    height: 350;
+                }
+
+                .playListMargin {
+                 margin: 0 30;
+                }
+
+                .background {
+                    background-color: rgba(0,0,0,.8);
+                }
+
             </style>
         </head>
-        <divTemplate class="alert">
-            <header class="header">
-                <description class="space"> </description>
-                <title class="title">Now Playing: </title>
-                <description class="space-small"> </description>
-                <description class="description">At anytime press the MENU button to view more videos.</description>
-                <description class="space"> </description>
-            </header>
-        </divTemplate>
-</document>`
-}
+       <stackTemplate theme="dark" class="background">
+          <identityBanner class="banner">
+              <background>
+                  <!--<img class="background" src="${this.CLIENTURL}images/bg-dark-banner.jpeg" width="1920" height="400"/>-->
+              </background>
+             <!--<title>Available Action Movies</title>-->
+          </identityBanner>
+          <collectionList>
+             <grid style="background-color: red">
+                <header>
+                    <title>Total Biscuit</title>
+                    <img src="https://yt3.ggpht.com/-JB_7MeH8Llk/AAAAAAAAAAI/AAAAAAAAAAA/Xbsn4j601BU/s100-c-k-no/photo.jpg" accessibility="" />
+                </header>
+                <section>
+                   {{ range $index, $pls := . }}
+                   <lockup playListSrc="{{ $pls.ID }}">
+                       <img class="playListMargin" width="480" height="360" src="{{ $pls.Thumbnails.High.Url }}"></img>
+                       <description>{{ $pls.Description | html }}</description>
+                   </lockup>
+                   {{end}}
+                </section>
+             </grid>
+          </collectionList>
+       </stackTemplate>
+    </document>`
+    }
