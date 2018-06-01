@@ -92,6 +92,7 @@ func main() {
 	router.Use(gin.Recovery())
 
 	api := router.Group("/api")
+
 	{
 		api.GET("/test", func(c *gin.Context) {
 			fmt.Println(c.Request.Header.Get("User-Agent"))
@@ -104,6 +105,7 @@ func main() {
 	}
 
 	client := router.Group("/client")
+
 	{
 		client.Static("/js", "./client/js")
 		client.Static("/vendor", "./client/vendor/")

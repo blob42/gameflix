@@ -11,13 +11,14 @@ import TVMLKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, TVApplicationControllerDelegate {
-
+	
     var window: UIWindow?
     
 
     var appController: TVApplicationController?
     
-    static let ServerURL = "http://192.168.24.1:9042"
+    	static let ServerURL = "http://192.168.24.1:9042"
+    //static let ServerURL = "http://marbelium.com:9042"
     
     static let TVClientURL = "\(ServerURL)/client/"
     
